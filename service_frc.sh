@@ -1,0 +1,2 @@
+#!/bin/bash                                                                                                  
+docker container run --rm --env-file .env --name service_sc_frc -v "/media/ProjetBI":/app/data/ -v LOG:/app/log etl_sc_frc:v2

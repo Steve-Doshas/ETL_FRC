@@ -3,7 +3,7 @@
 # Service : 
 |-----------|-----------|
 |-----------|-----------|
-| **Nom** |**ETL_industrie**| 
+| **Nom** |**ETL_FRC**| 
 | *Périodicité d’exécution*   | A 4h00 UTC. Tous les jours de la semaine|
 | *Description* | Ce service automatise la création et mise à jour de fichiers csv de référence contenant les informations actualisées et utiles concernant les FRC et les prospects FRC. Il génère également un fichier de synthèse avec les statistiques trimestrielles.
 | *Version* | **1.0** |
@@ -14,7 +14,7 @@
 
 |BD|Tables|
 |-----------|-----------|
-|Sugar|frc, researchunitsfrc_frc, researchunitsfrc_researchunits, researchunits, opportunities, opportunities_cstm, opportunities_contacts, researchunitscontacts_contacts, researchunitscontacts, researchunitscontacts_researchunits|
+|Sugar|frc, researchunitsfrc, researchunitsfrc_frc, researchunitsfrc_researchunits, researchunits, opportunities, opportunities_cstm, opportunities_contacts, researchunitscontacts_contacts, researchunitscontacts, researchunitscontacts_researchunits|
 
 # Sorties :
 

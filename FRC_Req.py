@@ -19,7 +19,7 @@ def etl_frc():
     SUGAR_URL_CONNECT = os.getenv('SUGAR_URL_CONNECT')
 
     # Créer une connexion à la base de données SUGAR
-    engine_sug = create_engine(f"mysql+pymysql://{os.getenv('SUGAR_USER')}:{os.getenv('SUGAR_PWORD')}@{os.getenv('SUGAR_HOST')}/{os.getenv('SUGAR_DB')}")
+    engine_sug = create_engine(SUGAR_URL_CONNECT)
 
     try:
         connection_sug = engine_sug.connect()
@@ -70,12 +70,15 @@ def etl_frc():
                 frc.ga_number,
                 frc.totale_initial,
                 ru.name AS ru_name,
-                ru.acronyme AS ru_acronyme
+                ru.acronyme AS ru_acronyme,
+                rufrc.coordinatrice
             FROM frc
-            LEFT JOIN researchunitsfrc_frc AS rufrc 
-                ON frc.id = rufrc.frc_id
+            LEFT JOIN researchunitsfrc_frc AS rufrcfrc
+                ON frc.id = rufrcfrc.frc_id
+            LEFT JOIN researchunitsfrc AS rufrc 
+                ON rufrcfrc.researchunitsfrc_id = rufrc.id
             LEFT JOIN researchunitsfrc_researchunits AS rufrcru 
-                ON rufrc.researchunitsfrc_id = rufrcru.researchunitsfrc_id
+                ON rufrcfrc.researchunitsfrc_id = rufrcru.researchunitsfrc_id
             LEFT JOIN researchunits AS ru 
                 ON rufrcru.researchunits_id = ru.id
             WHERE frc.deleted = 0;
@@ -85,6 +88,7 @@ def etl_frc():
     # Exécuter la requête SQL sur la base de données SUGAR via la connexion active
     result = connection_sug.execute(text(sql_query))
     df_frc = pd.read_sql_query(text(sql_query), connection_sug)
+    df_frc.coordinatrice = df_frc.coordinatrice.fillna(0).astype(int).astype(bool)
 
     sql_query = ''' 
 	SELECT 

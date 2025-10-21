@@ -7,7 +7,7 @@ RUN python3 -m venv /app/app-env
 COPY requirement.txt /app/requirement.txt
 RUN /bin/bash -c "source /app/app-env/bin/activate && pip install -r /app/requirement.txt"
 # Copie les fichiers nécessaires
-COPY .env /app/.env
+
 COPY FRC_Req.py /app/FRC_Req.py
 COPY update_frc.py /app/update_frc.py
 # Définit le répertoire de travail
