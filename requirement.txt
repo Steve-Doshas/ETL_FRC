@@ -1,0 +1,11 @@
+pandas
+oracledb
+sqlalchemy
+python-dotenv
+xlsxwriter
+pymysql
+python-dateutil
+progiter
+tqdm
+psutil
+openpyxl
